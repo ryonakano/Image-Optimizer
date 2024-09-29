@@ -1,4 +1,5 @@
-project('com.github.gijsgoudzwaard.image-optimizer', 'vala', 'c')
+project('com.github.gijsgoudzwaard.image-optimizer', 'vala', 'c',
+  meson_version: '>= 0.59.0')
 
 gnome = import('gnome')
 i18n = import('i18n')
@@ -37,4 +38,8 @@ executable(
 subdir('data')
 subdir('po')
 
-meson.add_install_script('meson/post_install.py')
+gnome.post_install(
+  glib_compile_schemas: 'true',
+  gtk_update_icon_cache: 'true',
+  update_desktop_database: 'true'
+)
